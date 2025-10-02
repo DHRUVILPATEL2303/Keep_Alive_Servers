@@ -1,0 +1,17 @@
+name: Keep Render Servers Alive
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # every 5 minutes
+  workflow_dispatch:      # allows manual run
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping SIH Backend
+        run: curl -I https://sih-backend-27v5.onrender.com/swagger/index.html
+      - name: Ping SIH NGO Backend
+        run: curl -I https://sih-ngo-backend.onrender.com/swagger/index.html
+      - name: Ping Soil API
+        run: curl -I https://soil-api-cre9.onrender.com
